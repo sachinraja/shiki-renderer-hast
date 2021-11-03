@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm clean && tsup src/index.ts --format esm --dts-resolve",
+    "build": "pnpm clean && tsup src/index.ts --format esm --dts",
     "clean": "rimraf dist",
     "format": "prettier -w .",
     "lint": "run-p lint:*",
@@ -27,15 +27,15 @@
     "shiki": "^0.9"
   },
   "dependencies": {
-    "@types/unist": "^2.0.6",
     "hastscript": "^7.0.2"
   },
   "devDependencies": {
+    "@swc-node/jest": "1.3.5",
     "@swc/core": "1.2.106",
-    "@swc/jest": "0.2.5",
     "@types/jest": "27.0.2",
     "@types/node": "16.11.6",
     "eslint-config-prettier": "8.3.0",
+    "hast-util-to-html": "8.0.3",
     "husky": "7.0.4",
     "jest": "27.3.1",
     "lint-staged": "11.2.6",
