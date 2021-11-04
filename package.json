@@ -1,6 +1,6 @@
 {
   "name": "shiki-renderer-hast",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "description": "hast renderer for Shiki",
   "repository": {
