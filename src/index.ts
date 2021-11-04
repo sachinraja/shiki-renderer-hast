@@ -8,21 +8,6 @@ import { IThemedToken, FontStyle, Theme, Lang, Highlighter } from 'shiki'
 // eslint-disable-next-line @typescript-eslint/ban-types
 type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 
-const htmlEscapes = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;',
-}
-
-const escapeHtml = (html: string) =>
-  html.replace(/[&<>"']/g, (chr) => {
-    const char = chr as keyof typeof htmlEscapes
-
-    return htmlEscapes[char]
-  })
-
 export type HastRendererOptions = {
   langId?: string
   fg?: string
@@ -70,7 +55,7 @@ export const renderToHast = (
         properties.style = cssDeclarations
       }
 
-      lineSpan.children.push(h('span', properties, escapeHtml(token.content)))
+      lineSpan.children.push(h('span', properties, token.content))
     }
   }
 
