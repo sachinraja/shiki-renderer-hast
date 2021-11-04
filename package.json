@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "type": "module",
   "description": "hast renderer for Shiki",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachinraja/shiki-renderer-hast.git"
+  },
+  "homepage": "https://github.com/sachinraja/shiki-renderer-hast#readme",
+  "bugs": {
+    "url": "https://github.com/sachinraja/shiki-renderer-hast/issues"
+  },
+  "author": "Sachin Raja <sachinraja2349@gmail.com>",
+  "license": "MIT",
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js"
@@ -10,6 +20,10 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "shiki",
+    "hast"
   ],
   "scripts": {
     "build": "pnpm clean && tsup src/index.ts --format esm --dts",
