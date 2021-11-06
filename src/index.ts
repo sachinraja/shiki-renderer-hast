@@ -57,6 +57,8 @@ export const renderToHast = (
 
       lineSpan.children.push(h('span', properties, token.content))
     }
+
+    lineSpan.children.push(h('br'))
   }
 
   return root
