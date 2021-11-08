@@ -44,7 +44,7 @@
     "hastscript": "^7.0.2"
   },
   "devDependencies": {
-    "@swc-node/jest": "1.3.5",
+    "@swc-node/jest": "1.4.0",
     "@swc/core": "1.2.107",
     "@types/jest": "27.0.2",
     "@types/node": "16.11.6",
