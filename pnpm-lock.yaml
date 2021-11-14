@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@swc-node/jest': 1.4.0
+  '@swc-node/jest': 1.4.1
   '@swc/core': 1.2.108
   '@types/jest': 27.0.2
   '@types/node': 16.11.7
@@ -25,7 +25,7 @@ dependencies:
   hastscript: 7.0.2
 
 devDependencies:
-  '@swc-node/jest': 1.4.0
+  '@swc-node/jest': 1.4.1
   '@swc/core': 1.2.108
   '@types/jest': 27.0.2
   '@types/node': 16.11.7
@@ -818,8 +818,8 @@ packages:
       '@swc/core': 1.2.108
     dev: true
 
-  /@swc-node/jest/1.4.0:
-    resolution: {integrity: sha512-fPdv7L/EFQ0VHQCBO9WC7NrzEZsVQrO3OZW5pX4W2ahLOfRvjd8dw/QKIREuvwWtuvfFFg+knRXKqj88Qq8mHg==}
+  /@swc-node/jest/1.4.1:
+    resolution: {integrity: sha512-Rv1Pt8T+kbj2QYB5uzOgKGTfbVXswa5VV5Es/RM42mu3qy2LerAW0J7mhttFDBGTvtN/ztTjcCpS601+vgULmg==}
     dependencies:
       '@node-rs/xxhash': 1.0.0
       '@swc-node/core': 1.8.0
