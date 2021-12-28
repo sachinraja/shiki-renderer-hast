@@ -38,7 +38,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "peerDependencies": {
-    "shiki": "^0.9"
+    "shiki": "^0.9 || ^0.10.0"
   },
   "dependencies": {
     "hastscript": "^7.0.2"
