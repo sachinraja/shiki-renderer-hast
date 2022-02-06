@@ -76,3 +76,17 @@ it('has proper encoding', async () => {
     `"<pre class=\\"shiki\\" style=\\"background-color: #2e3440ff\\"><code><span class=\\"line\\"><span style=\\"color: #81A1C1\\">&#x3C;div></span></span><br><span class=\\"line\\"><span style=\\"color: #D8DEE9FF\\">      </span><span style=\\"color: #81A1C1\\">&#x3C;span></span><span style=\\"color: #D8DEE9FF\\">hello</span><span style=\\"color: #81A1C1\\">&#x3C;/span></span></span><br><span class=\\"line\\"><span style=\\"color: #D8DEE9FF\\">    </span><span style=\\"color: #81A1C1\\">&#x3C;/div></span></span></code></pre>"`
   )
 })
+
+it('adds optional line classes', () => {
+  const tree = codeToHast(
+    globalHighlighter,
+    'const test = () => {\n  console.log("Hello World!")\n}',
+    'js',
+    undefined,
+    { lineOptions: [{ line: 2, classes: ['highlighted'] }] }
+  )
+
+  expect(toHtml(tree)).toMatchInlineSnapshot(
+    `"<pre class=\\"shiki\\" style=\\"background-color: #2e3440ff\\"><code><span class=\\"line\\"><span style=\\"color: #81A1C1\\">const</span><span style=\\"color: #D8DEE9FF\\"> </span><span style=\\"color: #88C0D0\\">test</span><span style=\\"color: #D8DEE9FF\\"> </span><span style=\\"color: #81A1C1\\">=</span><span style=\\"color: #D8DEE9FF\\"> </span><span style=\\"color: #ECEFF4\\">()</span><span style=\\"color: #D8DEE9FF\\"> </span><span style=\\"color: #81A1C1\\">=></span><span style=\\"color: #D8DEE9FF\\"> </span><span style=\\"color: #ECEFF4\\">{</span></span><br><span class=\\"line highlighted\\"><span style=\\"color: #D8DEE9FF\\">  </span><span style=\\"color: #D8DEE9\\">console</span><span style=\\"color: #ECEFF4\\">.</span><span style=\\"color: #88C0D0\\">log</span><span style=\\"color: #D8DEE9FF\\">(</span><span style=\\"color: #ECEFF4\\">\\"</span><span style=\\"color: #A3BE8C\\">Hello World!</span><span style=\\"color: #ECEFF4\\">\\"</span><span style=\\"color: #D8DEE9FF\\">)</span></span><br><span class=\\"line\\"><span style=\\"color: #ECEFF4\\">}</span></span></code></pre>"`
+  )
+})

@@ -8,10 +8,13 @@ import { IThemedToken, FontStyle, Theme, Lang, Highlighter } from 'shiki'
 // eslint-disable-next-line @typescript-eslint/ban-types
 type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 
+type LineOption = { line: number; classes?: string[] }
+
 export type HastRendererOptions = {
   langId?: string
   fg?: string
   bg?: string
+  lineOptions?: LineOption[]
 }
 
 export const renderToHast = (
@@ -19,6 +22,10 @@ export const renderToHast = (
   options: HastRendererOptions = {}
 ) => {
   const bg = options.bg ?? '#fff'
+  const optionsByLineNumber = groupBy(
+    options.lineOptions ?? [],
+    (option) => option.line
+  )
 
   const root = h('pre', { class: 'shiki', style: { 'background-color': bg } })
 
@@ -29,8 +36,11 @@ export const renderToHast = (
   const codeElement = h('code')
   root.children.push(codeElement)
 
-  for (const line of lines) {
-    const lineSpan = h('span', { class: 'line' })
+  for (const [lineIndex, line] of lines.entries()) {
+    const lineNumber = lineIndex + 1
+    const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
+    const lineClasses = getLineClasses(lineOptions)
+    const lineSpan = h('span', { className: lineClasses })
 
     codeElement.children.push(lineSpan)
 
@@ -66,11 +76,13 @@ export const renderToHast = (
   return root
 }
 
+/* eslint max-params: ["error", 5] */
 export const codeToHast = (
   highlighter: Highlighter,
   code: string,
   lang: StringLiteralUnion<Lang> | undefined = 'text',
-  theme?: StringLiteralUnion<Theme>
+  theme?: StringLiteralUnion<Theme>,
+  options?: HastRendererOptions
 ) => {
   const tokens = highlighter.codeToThemedTokens(code, lang, theme, {
     includeExplanation: false,
@@ -81,5 +93,37 @@ export const codeToHast = (
   return renderToHast(tokens, {
     fg: loadedTheme.fg,
     bg: loadedTheme.bg,
+    ...options,
   })
+}
+
+function groupBy<T, K>(
+  elements: T[],
+  keyGetter: (element: T) => K
+): Map<K, T[]> {
+  const map = new Map<K, T[]>()
+
+  for (const element of elements) {
+    const key = keyGetter(element)
+    if (map.has(key)) {
+      const group = map.get(key)!
+      group.push(element)
+    } else {
+      map.set(key, [element])
+    }
+  }
+
+  return map
+}
+
+function getLineClasses(lineOptions: LineOption[]): string[] {
+  const lineClasses = new Set(['line'])
+
+  for (const lineOption of lineOptions) {
+    for (const lineClass of lineOption.classes ?? []) {
+      lineClasses.add(lineClass)
+    }
+  }
+
+  return Array.from(lineClasses)
 }
