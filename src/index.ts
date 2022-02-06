@@ -68,7 +68,7 @@ export const renderToHast = (
       lineSpan.children.push(h('span', properties, token.content))
     }
 
-    codeElement.children.push(h('br'))
+    codeElement.children.push({ type: 'text', value: '\n' })
   }
 
   codeElement.children.pop()
