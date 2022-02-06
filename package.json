@@ -26,15 +26,15 @@
     "hast"
   ],
   "scripts": {
-    "build": "pnpm clean && tsup src/index.ts --format esm --dts",
-    "clean": "rimraf dist",
-    "format": "prettier -w .",
+    "build": "tsup",
+    "format": "dprint fmt",
     "lint": "run-p lint:*",
-    "lint:format": "prettier -c .",
+    "lint:format": "dprint check",
     "lint:types": "tsc",
+    "lint:js": "eslint .",
     "prepare": "husky install",
     "prepublishOnly": "pnpm build",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "vitest"
   },
   "peerDependencies": {
     "shiki": "^0.9 || ^0.10.0"
@@ -43,33 +43,34 @@
     "hastscript": "^7.0.2"
   },
   "devDependencies": {
-    "@swc-node/jest": "1.4.1",
-    "@swc/core": "1.2.111",
-    "@types/jest": "27.0.3",
-    "@types/node": "16.11.9",
+    "@types/node": "17.0.15",
+    "@typescript-eslint/eslint-plugin": "5.10.2",
+    "@typescript-eslint/parser": "5.10.2",
+    "dprint": "0.22.0",
+    "eslint": "8.8.0",
     "eslint-config-prettier": "8.3.0",
     "hast-util-to-html": "8.0.3",
     "husky": "7.0.4",
-    "jest": "27.3.1",
-    "lint-staged": "11.2.6",
+    "nano-staged": "0.5.0",
     "npm-run-all": "4.1.5",
-    "prettier": "2.4.1",
-    "prettier-plugin-pkg": "0.11.0",
-    "regenerator-runtime": "0.13.9",
-    "rimraf": "3.0.2",
-    "shiki": "0.9.12",
-    "tsup": "5.8.0",
-    "typescript": "4.4.4"
+    "shiki": "0.10.0",
+    "tsup": "5.11.13",
+    "typescript": "4.5.5",
+    "vite": "2.7.13",
+    "vitest": "0.2.7"
   },
   "sideEffects": false,
-  "lint-staged": {
-    "*.{js,ts,md,json,yaml}": "prettier -w"
+  "nano-staged": {
+    "*.{js,ts,md,json,yaml}": "dprint fmt"
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "plugins": [
-      "./node_modules/prettier-plugin-pkg"
-    ]
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "esm"
+    ],
+    "dts": true,
+    "clean": true
   }
 }

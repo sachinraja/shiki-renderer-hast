@@ -1,5 +1,5 @@
 import { h } from 'hastscript'
-import { IThemedToken, FontStyle, Theme, Lang, Highlighter } from 'shiki'
+import { FontStyle, Highlighter, IThemedToken, Lang, Theme } from 'shiki'
 
 /**
  * @see https://github.com/shikijs/shiki/blob/main/packages/shiki/src/types.ts#L171-L176
@@ -19,12 +19,12 @@ export type HastRendererOptions = {
 
 export const renderToHast = (
   lines: IThemedToken[][],
-  options: HastRendererOptions = {}
+  options: HastRendererOptions = {},
 ) => {
   const bg = options.bg ?? '#fff'
   const optionsByLineNumber = groupBy(
     options.lineOptions ?? [],
-    (option) => option.line
+    (option) => option.line,
   )
 
   const root = h('pre', { class: 'shiki', style: { 'background-color': bg } })
@@ -82,7 +82,7 @@ export const codeToHast = (
   code: string,
   lang: StringLiteralUnion<Lang> | undefined = 'text',
   theme?: StringLiteralUnion<Theme>,
-  options?: HastRendererOptions
+  options?: HastRendererOptions,
 ) => {
   const tokens = highlighter.codeToThemedTokens(code, lang, theme, {
     includeExplanation: false,
@@ -99,7 +99,7 @@ export const codeToHast = (
 
 function groupBy<T, K>(
   elements: T[],
-  keyGetter: (element: T) => K
+  keyGetter: (element: T) => K,
 ): Map<K, T[]> {
   const map = new Map<K, T[]>()
 

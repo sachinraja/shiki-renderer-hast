@@ -1,8 +1,9 @@
+import { toHtml } from 'hast-util-to-html'
 import { Element } from 'hastscript/lib/core'
 import { getHighlighter, Highlighter } from 'shiki'
-import { toHtml } from 'hast-util-to-html'
+import { beforeAll, expect, it } from 'vitest'
 import { codeToHast, renderToHast } from '../src'
-import fs from 'fs'
+
 let globalHighlighter: Highlighter
 let globalTree: Element
 
@@ -13,7 +14,7 @@ beforeAll(async () => {
 
   const tokens = globalHighlighter.codeToThemedTokens(
     'console.log("Hello World")',
-    'js'
+    'js',
   )
 
   globalTree = renderToHast(tokens)
@@ -30,7 +31,7 @@ it('has a code child', async () => {
 
 it('renders html', () => {
   expect(toHtml(globalTree)).toMatchInlineSnapshot(
-    `"<pre class=\\"shiki\\" style=\\"background-color: #fff\\"><code><span class=\\"line\\"><span style=\\"color: #D8DEE9\\">console</span><span style=\\"color: #ECEFF4\\">.</span><span style=\\"color: #88C0D0\\">log</span><span style=\\"color: #D8DEE9FF\\">(</span><span style=\\"color: #ECEFF4\\">\\"</span><span style=\\"color: #A3BE8C\\">Hello World</span><span style=\\"color: #ECEFF4\\">\\"</span><span style=\\"color: #D8DEE9FF\\">)</span></span></code></pre>"`
+    '"<pre class=\\"shiki\\" style=\\"background-color: #fff\\"><code><span class=\\"line\\"><span style=\\"color: #D8DEE9\\">console</span><span style=\\"color: #ECEFF4\\">.</span><span style=\\"color: #88C0D0\\">log</span><span style=\\"color: #D8DEE9FF\\">(</span><span style=\\"color: #ECEFF4\\">\\"</span><span style=\\"color: #A3BE8C\\">Hello World</span><span style=\\"color: #ECEFF4\\">\\"</span><span style=\\"color: #D8DEE9FF\\">)</span></span></code></pre>"',
   )
 })
 
@@ -38,7 +39,7 @@ it('has defaults with theme', () => {
   const tree = codeToHast(
     globalHighlighter,
     'const test = () => {\n  console.log("Hello World!")\n}',
-    'js'
+    'js',
   )
 
   expect(toHtml(tree)).toMatchInlineSnapshot(`
@@ -57,7 +58,7 @@ it('uses correct theme', async () => {
     highlighter,
     'const test = () => {\n  console.log("Hello World!")\n}',
     'js',
-    'poimandres'
+    'poimandres',
   )
 
   expect(toHtml(tree)).toMatchInlineSnapshot(`
@@ -73,7 +74,7 @@ it('has proper encoding', async () => {
     `<div>
       <span>hello</span>
     </div>`,
-    'html'
+    'html',
   )
 
   expect(toHtml(tree)).toMatchInlineSnapshot(`
@@ -89,7 +90,7 @@ it('adds optional line classes', () => {
     'const test = () => {\n  console.log("Hello World!")\n}',
     'js',
     undefined,
-    { lineOptions: [{ line: 2, classes: ['highlighted'] }] }
+    { lineOptions: [{ line: 2, classes: ['highlighted'] }] },
   )
 
   expect(toHtml(tree)).toMatchInlineSnapshot(`
