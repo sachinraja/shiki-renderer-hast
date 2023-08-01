@@ -8,7 +8,7 @@ specifiers:
   eslint: 8.8.0
   eslint-config-prettier: 8.3.0
   hast-util-to-html: 8.0.3
-  hastscript: ^7.0.2
+  hastscript: ^8.0.0
   husky: 7.0.4
   nano-staged: 0.5.0
   npm-run-all: 4.1.5
@@ -19,7 +19,7 @@ specifiers:
   vitest: 0.2.7
 
 dependencies:
-  hastscript: 7.0.2
+  hastscript: 8.0.0
 
 devDependencies:
   '@types/node': 17.0.15
@@ -107,6 +107,13 @@ packages:
     resolution: {integrity: sha512-wLEm0QvaoawEDoTRwzTXp4b4jpwiJDvR5KMnFnVodm3scufTlBOWRD6N1OBf9TZMhjlNsSfcO5V+7AF4+Vy+9g==}
     dependencies:
       '@types/unist': 2.0.6
+    dev: true
+
+  /@types/hast/3.0.0:
+    resolution: {integrity: sha512-SoytUJRuf68HXYqcXicQIhCrLQjqeYU2anikr4G3p3Iz+OZO5QDQpDj++gv+RenHsnUBwNZ2dumBArF8VLSk2Q==}
+    dependencies:
+      '@types/unist': 2.0.6
+    dev: false
 
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
@@ -1266,10 +1273,10 @@ packages:
       '@types/unist': 2.0.6
     dev: true
 
-  /hast-util-parse-selector/3.1.0:
-    resolution: {integrity: sha512-AyjlI2pTAZEOeu7GeBPZhROx0RHBnydkQIXlhnFzDi0qfXTmGUWoCYZtomHbrdrheV4VFUlPcfJ6LMF5T6sQzg==}
+  /hast-util-parse-selector/4.0.0:
+    resolution: {integrity: sha512-wkQCkSYoOGCRKERFWcxMVMOcYE2K1AaNLU8DXS9arxnLOUEWbOXKXiJUNzEpqZ3JOKpnha3jkFrumEjVliDe7A==}
     dependencies:
-      '@types/hast': 2.3.4
+      '@types/hast': 3.0.0
     dev: false
 
   /hast-util-to-html/8.0.3:
@@ -1291,12 +1298,12 @@ packages:
     resolution: {integrity: sha512-Pkw+xBHuV6xFeJprJe2BBEoDV+AvQySaz3pPDRUs5PNZEMQjpXJJueqrpcHIXxnWTcAGi/UOCgVShlkY6kLoqg==}
     dev: true
 
-  /hastscript/7.0.2:
-    resolution: {integrity: sha512-uA8ooUY4ipaBvKcMuPehTAB/YfFLSSzCwFSwT6ltJbocFUKH/GDHLN+tflq7lSRf9H86uOuxOFkh1KgIy3Gg2g==}
+  /hastscript/8.0.0:
+    resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
     dependencies:
-      '@types/hast': 2.3.4
+      '@types/hast': 3.0.0
       comma-separated-tokens: 2.0.2
-      hast-util-parse-selector: 3.1.0
+      hast-util-parse-selector: 4.0.0
       property-information: 6.1.0
       space-separated-tokens: 2.0.1
     dev: false
